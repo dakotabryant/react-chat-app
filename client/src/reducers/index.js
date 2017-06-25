@@ -1,20 +1,40 @@
 /* eslint-disable */
 import {
-  FETCH_RESTAURANT_REQUEST
+  LOAD_ROOM,
+  SEND_MESSAGE,
+  RECEIVE_MESSAGE
 } from '../actions';
 
 const initialState = {
     error: null,
-    usersConnected: false
+    usersConnected: false,
+    currentRoom: 'Home',
+    userList: {},
+    roomsList: {}
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_RESTAURANT_REQUEST:
+    case LOAD_ROOM:
       return {
         ...state,
-        currentRecipes: {...state.currentRecipes},
-        listingsShowing: true
+        usersConnected: true,
+        currentRoom: action.room,
+        userList: {...action.user}
+      }
+    case SEND_MESSAGE:
+      return {
+        ...state,
+        usersConnected: true,
+        currentRoom: action.room,
+        userList: {...action.user}
+      }
+    case RECEIVE_MESSAGE:
+      return {
+        ...state,
+        usersConnected: true,
+        currentRoom: action.room,
+        userList: {...action.user}
       }
     default:
       return state;

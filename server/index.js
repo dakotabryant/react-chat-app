@@ -3,9 +3,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const socket = require('socket.io');
 const {DATABASE_URL} = require('./config');
 
 const app = express();
+
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -42,6 +45,20 @@ function runServer(databaseUrl = DATABASE_URL, port = 3001) {
         reject(err);
       });
     });
+  });
+}
+
+const io = socket(server);
+const socketConnection = () => {
+  io.on('connection', socket => {
+    console.log('made socket connection');
+
+    socket.on('chat', function(data) {
+      io.sockets.emit('chat', data)
+    });
+    socket.on('typing', function(data) {
+      socket.broadcast.emit('typing', data)
+    })
   });
 }
 

@@ -5,6 +5,17 @@
 .uppercase {
   text-transform: uppercase; }
 
+.chat-window {
+  background-color: #424242;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: white; }
+  .chat-window strong {
+    margin-left: 25px; }
+
 body {
   font-family: 'Roboto Condensed', sans-serif;
   padding: 0;
